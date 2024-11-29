@@ -1,4 +1,4 @@
--- src/main/resources/db/migration/logitrack.sql
+-- src/main/resources/db/migration/V1__criar_usuario.sql
 
 -- Criando a sequência
 CREATE SEQUENCE logitrack START WITH 1 INCREMENT BY 1;

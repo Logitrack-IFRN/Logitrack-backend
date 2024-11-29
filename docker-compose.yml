@@ -1,16 +1,29 @@
-version: '3.9'
+version: '3.8'
+
 services:
   postgres:
-    image: postgres:15
-    container_name: postgres_logitrack
-    environment:
-      POSTGRES_USER: logitrack
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: logitrack
+    image: postgres:latest
+    container_name: postgres-db
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: logitrack_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    networks:
+      - postgres-network
 
-volumes:
-  postgres_data:
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@logitrack.com
+      PGADMIN_DEFAULT_PASSWORD: Pr0jEt0@2024TuRm@.2
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    driver: bridge
